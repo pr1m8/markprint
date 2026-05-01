@@ -1,0 +1,54 @@
+site_name: Markprint
+site_description: Beautiful, configurable Markdown-to-PDF rendering for Python.
+repo_url: https://github.com/pr1m8/markprint
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Quickstart: quickstart.md
+  - Design: design.md
+  - CLI: cli.md
+  - Python API: python-api.md
+  - Configuration: configuration.md
+  - Frontmatter: frontmatter.md
+  - Logging: logging.md
+  - Themes: themes.md
+  - Profiles: profiles.md
+  - Engines:
+      - Overview: engines/index.md
+      - WeasyPrint: engines/weasyprint.md
+      - Playwright: engines/playwright.md
+      - Pandoc: engines/pandoc.md
+  - Markdown:
+      - Markdown-it: markdown/markdown-it.md
+      - Python-Markdown: markdown/python-markdown.md
+      - Extensions: markdown/extensions.md
+  - Advanced:
+      - Raw Markdown Input: advanced/raw-markdown-input.md
+      - Stdin: advanced/stdin.md
+      - Mermaid: advanced/mermaid.md
+      - Math: advanced/math.md
+      - Citations: advanced/citations.md
+      - Custom Themes: advanced/custom-themes.md
+      - Plugins: advanced/plugins.md
+      - PDF Post-processing: advanced/pdf-post-processing.md
+      - Visual Regression: advanced/visual-regression.md
+  - Examples:
+      - README: examples/readme.md
+      - Report: examples/report.md
+      - Resume: examples/resume.md
+      - Academic Paper: examples/academic-paper.md
+plugins:
+  - search
+markdown_extensions:
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - toc:
+      permalink: true
