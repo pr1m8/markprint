@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ title }}</title>
+  <style>{{ css }}</style>
+</head>
+<body class="markprint profile-{{ options.profile }} theme-{{ options.theme }}">
+  {% if metadata.title %}<header class="cover"><h1>{{ metadata.title }}</h1>{% if metadata.author %}<p class="author">{{ metadata.author }}</p>{% endif %}</header>{% endif %}
+  {{ toc_html | safe }}
+  <main class="markdown-body">{{ body_html | safe }}</main>
+</body>
+</html>
