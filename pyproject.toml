@@ -1,6 +1,6 @@
 [project]
 name = "markprint"
-version = "0.1.4"
+version = "0.1.5"
 description = "Beautiful, configurable, extensible Markdown-to-PDF rendering for Python."
 readme = "README.md"
 requires-python = ">=3.13"
