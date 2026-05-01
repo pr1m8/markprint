@@ -29,6 +29,12 @@ jobs:
       - name: Install dependencies
         run: pdm install -G dev -G test
 
+      - name: Run lint
+        run: pdm run ruff check .
+
+      - name: Run format check
+        run: pdm run ruff format --check .
+
       - name: Run tests
         run: pdm run pytest --cov=markprint --cov-report=term-missing
 
