@@ -1,0 +1,28 @@
+default_input = "examples/readme/README.md"
+default_output = "dist/examples/readme.pdf"
+default_out_dir = "dist/pdf"
+
+engine = "weasyprint"
+markdown_engine = "markdown-it"
+theme = "github"
+profile = "docs"
+toc = true
+page_numbers = true
+code_theme = "default"
+page_size = "Letter"
+margin = "0.8in"
+debug_html = false
+debug_css = false
+open_after_render = false
+
+[paths]
+assets_dir = "examples/report/assets"
+themes_dir = "themes"
+templates_dir = "templates"
+
+[logging]
+enabled = false
+backend = "stdlib"
+preset = "dev"
+level = "INFO"
+mode = "rich"

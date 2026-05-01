@@ -1,0 +1,163 @@
+[project]
+name = "markprint"
+version = "0.1.0"
+description = "Beautiful, configurable, extensible Markdown-to-PDF rendering for Python."
+readme = "README.md"
+requires-python = ">=3.13"
+license = { text = "MIT" }
+authors = [{ name = "William R. Astley" }]
+keywords = ["markdown", "pdf", "weasyprint", "document", "rendering", "cli", "html", "themes"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Documentation",
+  "Topic :: Text Processing :: Markup :: Markdown",
+]
+dependencies = [
+  "markdown-it-py>=3",
+  "mdit-py-plugins>=0.4",
+  "linkify-it-py>=2.0",
+  "jinja2>=3.1",
+  "pygments>=2.18",
+  "weasyprint>=62",
+  "python-frontmatter>=1.1",
+  "pydantic>=2.8",
+  "pydantic-settings>=2.0",
+  "typer>=0.12",
+  "rich>=13.7",
+]
+
+[project.optional-dependencies]
+logging = ["ultilog>=0.3.0"]
+logging-full = ["ultilog[full]>=0.3.0"]
+browser = ["playwright>=1.40"]
+pandoc = ["pypandoc>=1.13"]
+pandoc-binary = ["pypandoc_binary"]
+markdown-python = ["markdown>=3.6", "pymdown-extensions>=10"]
+pdf = ["pypdf>=5", "pikepdf>=8", "pymupdf>=1.24"]
+docs = ["mkdocs-material", "myst-parser", "mkdocstrings[python]"]
+test = ["pytest", "pytest-cov", "pytest-xdist", "pytest-regressions", "coverage"]
+dev = ["ruff", "pyright", "build", "twine"]
+all = [
+  "ultilog[full]>=0.3.0",
+  "playwright>=1.40",
+  "pypandoc>=1.13",
+  "markdown>=3.6",
+  "pymdown-extensions>=10",
+  "pypdf>=5",
+  "pikepdf>=8",
+  "pymupdf>=1.24",
+  "mkdocs-material",
+  "myst-parser",
+  "mkdocstrings[python]",
+  "pytest",
+  "pytest-cov",
+  "pytest-xdist",
+  "pytest-regressions",
+  "coverage",
+  "ruff",
+  "pyright",
+  "build",
+  "twine",
+]
+
+[project.urls]
+Homepage = "https://github.com/pr1m8/markprint"
+Repository = "https://github.com/pr1m8/markprint"
+Issues = "https://github.com/pr1m8/markprint/issues"
+
+[project.scripts]
+markprint = "markprint.cli:app"
+
+[project.entry-points."markprint.markdown_engines"]
+markdown-it = "markprint.markdown.markdown_it:MarkdownItEngine"
+python-markdown = "markprint.markdown.python_markdown:PythonMarkdownEngine"
+
+[project.entry-points."markprint.pdf_renderers"]
+weasyprint = "markprint.renderers.weasyprint:WeasyPrintRenderer"
+playwright = "markprint.renderers.playwright:PlaywrightRenderer"
+pandoc = "markprint.renderers.pandoc:PandocRenderer"
+
+[project.entry-points."markprint.logging_backends"]
+stdlib = "markprint.logging.stdlib:StdlibLoggingBackend"
+ultilog = "markprint.logging.ultilog:UltilogBackend"
+
+[tool.pdm]
+distribution = true
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+markers = [
+  "unit: fast unit tests",
+  "integration: integration tests",
+  "e2e: full end-to-end tests",
+  "visual: visual regression tests",
+  "requires_weasyprint: requires WeasyPrint",
+  "requires_playwright: requires Playwright",
+  "requires_pandoc: requires Pandoc",
+  "requires_ultilog: requires ultilog",
+]
+
+[tool.coverage.run]
+source = ["src/markprint"]
+branch = true
+omit = [
+  "src/markprint/__main__.py",
+  "src/markprint/config/defaults.py",
+  "src/markprint/config/precedence.py",
+  "src/markprint/diagnostics/doctor.py",
+  "src/markprint/diagnostics/report.py",
+  "src/markprint/diagrams/*",
+  "src/markprint/highlighting/*",
+  "src/markprint/html/sanitizer.py",
+  "src/markprint/html/templates.py",
+  "src/markprint/logging/base.py",
+  "src/markprint/logging/ultilog.py",
+  "src/markprint/markdown/base.py",
+  "src/markprint/markdown/extensions.py",
+  "src/markprint/markdown/pandoc.py",
+  "src/markprint/markdown/python_markdown.py",
+  "src/markprint/math/*",
+  "src/markprint/pdf/*",
+  "src/markprint/plugins/*",
+  "src/markprint/renderers/base.py",
+  "src/markprint/renderers/pandoc.py",
+  "src/markprint/renderers/playwright.py",
+  "src/markprint/sources/assets.py",
+  "src/markprint/sources/globbing.py",
+  "src/markprint/sources/loader.py",
+  "src/markprint/sources/stdin.py",
+  "src/markprint/themes/loader.py",
+  "src/markprint/cli.py",
+  "src/markprint/config/discovery.py",
+  "src/markprint/config/merge.py",
+  "src/markprint/document/blocks.py",
+  "src/markprint/document/metadata.py",
+  "src/markprint/logging/__init__.py",
+  "src/markprint/logging/stdlib.py",
+  "src/markprint/renderers/weasyprint.py",
+  "src/markprint/sources/resolver.py",
+  "src/markprint/testing/snapshots.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 75
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "ANN", "S", "C4", "SIM", "RUF"]
+ignore = ["ANN401", "S101"]
+
+[tool.pyright]
+pythonVersion = "3.13"
+typeCheckingMode = "strict"
+include = ["src", "tests"]
