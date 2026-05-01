@@ -1,54 +1,116 @@
 site_name: Markprint
-site_description: Beautiful, configurable Markdown-to-PDF rendering for Python.
+site_description: Beautiful, configurable, extensible Markdown-to-PDF rendering for Python.
+site_url: https://markprint.readthedocs.io/
 repo_url: https://github.com/pr1m8/markprint
+repo_name: pr1m8/markprint
+edit_uri: edit/main/docs/
+
+copyright: Copyright &copy; William R. Astley
+
 theme:
   name: material
+  language: en
   features:
+    - navigation.instant
+    - navigation.tracking
     - navigation.sections
     - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - search.highlight
+    - search.suggest
     - content.code.copy
+    - content.tabs.link
+    - toc.follow
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
 nav:
   - Home: index.md
-  - Installation: installation.md
-  - Quickstart: quickstart.md
-  - Design: design.md
-  - CLI: cli.md
-  - Python API: python-api.md
-  - Configuration: configuration.md
-  - Frontmatter: frontmatter.md
-  - Logging: logging.md
-  - Themes: themes.md
-  - Profiles: profiles.md
+  - Getting Started:
+      - getting-started/index.md
+      - Installation: getting-started/installation.md
+      - Quickstart: getting-started/quickstart.md
+      - First PDF: getting-started/first-pdf.md
+      - Common Workflows: getting-started/workflows.md
+  - Concepts:
+      - concepts/index.md
+      - Architecture: concepts/architecture.md
+      - Render Pipeline: concepts/pipeline.md
+      - Configuration Model: concepts/configuration-model.md
+      - Input and Output Model: concepts/input-output.md
+  - Reference:
+      - reference/index.md
+      - CLI: reference/cli.md
+      - Python API: reference/python-api.md
+      - Configuration: reference/configuration.md
+      - Frontmatter: reference/frontmatter.md
+      - Themes: reference/themes.md
+      - Profiles: reference/profiles.md
   - Engines:
-      - Overview: engines/index.md
+      - engines/index.md
       - WeasyPrint: engines/weasyprint.md
       - Playwright: engines/playwright.md
       - Pandoc: engines/pandoc.md
-  - Markdown:
-      - Markdown-it: markdown/markdown-it.md
-      - Python-Markdown: markdown/python-markdown.md
-      - Extensions: markdown/extensions.md
+  - Guides:
+      - guides/index.md
+      - Reports: guides/reports.md
+      - Resumes: guides/resumes.md
+      - Batch Rendering: guides/batch-rendering.md
+      - Multi-file Manuals: guides/manuals.md
+      - Debugging Output: guides/debugging.md
   - Advanced:
-      - Raw Markdown Input: advanced/raw-markdown-input.md
-      - Stdin: advanced/stdin.md
-      - Mermaid: advanced/mermaid.md
-      - Math: advanced/math.md
-      - Citations: advanced/citations.md
-      - Custom Themes: advanced/custom-themes.md
+      - advanced/index.md
+      - Logging: advanced/logging.md
       - Plugins: advanced/plugins.md
       - PDF Post-processing: advanced/pdf-post-processing.md
-      - Visual Regression: advanced/visual-regression.md
+      - Mermaid and Diagrams: advanced/diagrams.md
+      - Math Rendering: advanced/math.md
+      - Custom Themes: advanced/custom-themes.md
+  - Development:
+      - development/index.md
+      - Testing: development/testing.md
+      - Documentation: development/docs.md
+      - Release: development/release.md
   - Examples:
-      - README: examples/readme.md
+      - examples/index.md
+      - README to PDF: examples/readme.md
       - Report: examples/report.md
       - Resume: examples/resume.md
-      - Academic Paper: examples/academic-paper.md
-plugins:
-  - search
-markdown_extensions:
-  - admonition
-  - pymdownx.superfences
-  - pymdownx.highlight
-  - pymdownx.inlinehilite
-  - toc:
-      permalink: true
+      - Academic Paper: examples/academic.md
