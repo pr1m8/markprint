@@ -1,5 +1,8 @@
 """Document metadata helpers."""
+
 from __future__ import annotations
+
+
 def get_title(metadata: dict[str, object], fallback: str = "Untitled") -> str:
     """Read a title from metadata.
 

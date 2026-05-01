@@ -50,7 +50,7 @@ class MarkdownToPdfPipeline:
     """
 
     @classmethod
-    def default(cls) -> "MarkdownToPdfPipeline":
+    def default(cls) -> MarkdownToPdfPipeline:
         """Create a default pipeline.
 
         Args:
@@ -177,7 +177,9 @@ class MarkdownToPdfPipeline:
             None.
         """
         profile_name = str(metadata.get("profile") or options.profile)
-        profile_defaults = get_profile_defaults(profile_name) if profile_name in self._profile_names() else {}
+        profile_defaults = (
+            get_profile_defaults(profile_name) if profile_name in self._profile_names() else {}
+        )
         candidate: dict[str, Any] = {**profile_defaults, **metadata}
         allowed = set(RenderOptions.model_fields)
         updates = {key: value for key, value in candidate.items() if key in allowed}
@@ -224,7 +226,7 @@ class MarkdownToPdfPipeline:
         path.parent.mkdir(parents=True, exist_ok=True)
         return path
 
-    def _markdown_engine(self, name: str):
+    def _markdown_engine(self, name: str) -> object:
         if name == "markdown-it":
             return MarkdownItEngine()
         if name == "python-markdown":
@@ -233,7 +235,7 @@ class MarkdownToPdfPipeline:
             return PandocMarkdownEngine()
         raise ValueError(f"Unknown Markdown engine: {name}")
 
-    def _pdf_renderer(self, name: str):
+    def _pdf_renderer(self, name: str) -> object:
         if name == "weasyprint":
             return WeasyPrintRenderer()
         if name == "playwright":

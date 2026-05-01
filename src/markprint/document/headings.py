@@ -45,4 +45,7 @@ def extract_headings(markdown: str) -> list[Heading]:
         >>> extract_headings('# A\n## B')[1].level
         2
     """
-    return [Heading(level=len(m.group(1)), title=m.group(2), slug=slugify(m.group(2))) for m in _HEADING_RE.finditer(markdown)]
+    return [
+        Heading(level=len(m.group(1)), title=m.group(2), slug=slugify(m.group(2)))
+        for m in _HEADING_RE.finditer(markdown)
+    ]

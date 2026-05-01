@@ -1,7 +1,12 @@
 """Block inspection helpers for future diagnostics."""
+
 from __future__ import annotations
+
 import re
+
 _CODE_RE = re.compile(r"```([\w-]*)\n(.*?)```", re.DOTALL)
+
+
 def extract_code_languages(markdown: str) -> list[str]:
     """Extract fenced code block languages.
 

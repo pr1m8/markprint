@@ -4,6 +4,7 @@ Purpose:
     Render common Markdown to HTML without requiring heavy optional imports at
     module import time.
 """
+
 from __future__ import annotations
 
 import html

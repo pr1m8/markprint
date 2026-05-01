@@ -8,6 +8,7 @@ Design:
     so the core pipeline remains lightweight and easy to test. Theme CSS is
     loaded from bundled package resources.
 """
+
 from __future__ import annotations
 
 from importlib.resources import files
@@ -49,7 +50,7 @@ class HtmlBuilder:
         css = self._load_theme_css(options.theme)
         title = str(document.metadata.get("title") or "Markprint Document")
         toc = self._render_toc(document, options)
-        html = """<!doctype html>
+        html = f"""<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -57,14 +58,14 @@ class HtmlBuilder:
   <title>{title}</title>
   <style>{css}</style>
 </head>
-<body class="markprint theme-{theme}">
+<body class="markprint theme-{options.theme}">
   <main class="document">
     {toc}
-    {body}
+    {document.body_html}
   </main>
 </body>
 </html>
-""".format(title=title, css=css, theme=options.theme, toc=toc, body=document.body_html)
+"""
         return StyledHtmlDocument(html=html, css=css, base_url=document.base_url)
 
     def _render_toc(self, document: HtmlDocument, options: RenderOptions) -> str:
@@ -83,7 +84,8 @@ class HtmlBuilder:
         if not options.toc or not document.headings:
             return ""
         items = "\n".join(
-            f'<li class="toc-level-{heading.level}"><a href="#{heading.slug}">{heading.title}</a></li>'
+            f'<li class="toc-level-{heading.level}">'
+            f'<a href="#{heading.slug}">{heading.title}</a></li>'
             for heading in document.headings
         )
         return f'<nav class="toc"><h2>Contents</h2><ul>{items}</ul></nav>'

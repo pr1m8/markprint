@@ -1,7 +1,11 @@
 """Entry point discovery helpers."""
+
 from __future__ import annotations
+
 from importlib.metadata import entry_points
 from typing import Any
+
+
 def load_entrypoint_group(group: str) -> dict[str, Any]:
     """Load entry points for a group.
 

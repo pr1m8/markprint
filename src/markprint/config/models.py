@@ -150,7 +150,7 @@ class RenderOptions(BaseModel):
     paths: PathSettings = Field(default_factory=PathSettings)
 
     @model_validator(mode="after")
-    def validate_output_targets(self) -> "RenderOptions":
+    def validate_output_targets(self) -> RenderOptions:
         """Validate mutually exclusive output choices.
 
         Args:
@@ -170,7 +170,7 @@ class RenderOptions(BaseModel):
             raise ValueError("Use either output or out_dir for a single render, not both.")
         return self
 
-    def with_output_default(self, source_path: Path | None = None) -> "RenderOptions":
+    def with_output_default(self, source_path: Path | None = None) -> RenderOptions:
         """Return options with an inferred PDF output if missing.
 
         Args:

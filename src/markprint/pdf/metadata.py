@@ -1,6 +1,10 @@
 """PDF metadata helpers."""
+
 from __future__ import annotations
+
 from markprint.document.models import PdfArtifact
+
+
 def with_metadata(artifact: PdfArtifact, metadata: dict[str, str]) -> PdfArtifact:
     """Attach metadata to an artifact model.
 

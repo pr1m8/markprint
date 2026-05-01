@@ -1,13 +1,20 @@
 """Optional Playwright PDF renderer."""
+
 from __future__ import annotations
+
 import tempfile
 from pathlib import Path
+
 from markprint.config.models import RenderOptions
-from markprint.document.models import PdfArtifact, StyledHtmlDocument
 from markprint.diagnostics.errors import DependencyMissingError
+from markprint.document.models import PdfArtifact, StyledHtmlDocument
+
+
 class PlaywrightRenderer:
     """Render styled HTML through Chromium with Playwright."""
+
     name = "playwright"
+
     def render(self, document: StyledHtmlDocument, options: RenderOptions) -> PdfArtifact:
         """Render styled HTML to PDF using Playwright.
 
@@ -24,7 +31,9 @@ class PlaywrightRenderer:
         try:
             from playwright.sync_api import sync_playwright
         except ImportError as exc:  # pragma: no cover
-            raise DependencyMissingError("Install with: pip install 'markprint[browser]' and run playwright install chromium") from exc
+            raise DependencyMissingError(
+                "Install with: pip install 'markprint[browser]' and run playwright install chromium"
+            ) from exc
         with tempfile.TemporaryDirectory() as tmp:
             html_path = Path(tmp) / "document.html"
             html_path.write_text(document.html, encoding="utf-8")

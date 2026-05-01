@@ -19,6 +19,13 @@ Examples:
 
 from __future__ import annotations
 
+from markprint.api import (
+    list_profiles,
+    list_themes,
+    render_html,
+    render_pdf,
+    render_pdf_bytes,
+)
 from markprint.config.models import LoggingSettings, RenderOptions
 from markprint.document.models import PdfArtifact
 from markprint.sources.models import MarkdownSource
@@ -34,7 +41,7 @@ _LAZY_API = {
 }
 
 
-def __getattr__(name: str):
+def __getattr__(name: str) -> object:
     """Resolve rendering helpers lazily.
 
     Args:

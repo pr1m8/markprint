@@ -1,7 +1,12 @@
 """PDF preview helpers using optional PyMuPDF."""
+
 from __future__ import annotations
+
 from pathlib import Path
+
 from markprint.diagnostics.errors import DependencyMissingError
+
+
 def render_first_page(pdf_path: Path, output_path: Path) -> Path:
     """Render the first page of a PDF to PNG.
 

@@ -1,8 +1,13 @@
 """Mermaid rendering placeholders."""
+
 from __future__ import annotations
+
 from markprint.diagnostics.errors import DependencyMissingError
+
+
 class MermaidRenderer:
     """Future Mermaid renderer using Playwright or Mermaid CLI."""
+
     def render_svg(self, code: str) -> str:
         """Render Mermaid to SVG.
 

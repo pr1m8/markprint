@@ -1,7 +1,12 @@
 """PDF merge helpers using optional pypdf."""
+
 from __future__ import annotations
+
 from pathlib import Path
+
 from markprint.diagnostics.errors import DependencyMissingError
+
+
 def merge_pdfs(paths: list[Path], output: Path) -> Path:
     """Merge PDFs using pypdf.
 

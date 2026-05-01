@@ -106,7 +106,9 @@ def render_pdf(
     opts = options or RenderOptions()
     if output is not None:
         opts = opts.model_copy(update={"output": Path(output)})
-    return MarkdownToPdfPipeline.default().render(_source_from_args(source, markdown, base_url), opts)
+    return MarkdownToPdfPipeline.default().render(
+        _source_from_args(source, markdown, base_url), opts
+    )
 
 
 def render_pdf_bytes(

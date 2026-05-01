@@ -194,7 +194,9 @@ def render_string(
     output: Annotated[Path, typer.Option("--output", "-o")],
     theme: str = "default",
     engine: str = "weasyprint",
-    base_url: Annotated[Path | None, typer.Option(help="Base directory for relative assets.")] = None,
+    base_url: Annotated[
+        Path | None, typer.Option(help="Base directory for relative assets.")
+    ] = None,
 ) -> None:
     """Render a raw Markdown string to PDF."""
     options = RenderOptions(output=output, theme=theme, engine=engine)  # type: ignore[arg-type]
@@ -212,7 +214,9 @@ def batch(
     """Render multiple Markdown files into separate PDFs."""
     for path in expand_inputs(inputs):
         output = infer_output_path(path, out_dir=out_dir)
-        render_pdf(path, output=output, options=RenderOptions(output=output, theme=theme, profile=profile))
+        render_pdf(
+            path, output=output, options=RenderOptions(output=output, theme=theme, profile=profile)
+        )
         console.print(f"[green]✓[/] {path} -> {output}")
 
 
@@ -224,13 +228,19 @@ def compile_command(
     profile: str = "book",
 ) -> None:
     """Compile multiple Markdown files into one PDF."""
-    source = MarkdownSource.compile_files(inputs)
-    artifact = render_pdf(source=source, output=output, options=RenderOptions(output=output, theme=theme, profile=profile))
+    source = MarkdownSource.compile_files(list(inputs))
+    artifact = render_pdf(
+        source=source,
+        output=output,
+        options=RenderOptions(output=output, theme=theme, profile=profile),
+    )
     _print_success(artifact.output_path or output)
 
 
 @app.command("html")
-def html_command(input: Path, output: Annotated[Path, typer.Option("--output", "-o")], theme: str = "default") -> None:
+def html_command(
+    input: Path, output: Annotated[Path, typer.Option("--output", "-o")], theme: str = "default"
+) -> None:
     """Render Markdown to debug HTML."""
     styled = render_html(input, options=RenderOptions(theme=theme))
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -267,7 +277,9 @@ def engines() -> None:
 def config_command() -> None:
     """Show discovered project configuration."""
     config = discover_config(Path.cwd())
-    console.print(Panel(repr(config) if config else "No project config found.", title="markprint config"))
+    console.print(
+        Panel(repr(config) if config else "No project config found.", title="markprint config")
+    )
 
 
 @app.command("doctor")
@@ -276,7 +288,15 @@ def doctor() -> None:
     table = Table(title="Markprint Doctor")
     table.add_column("Check")
     table.add_column("Status")
-    checks = ["markdown_it", "jinja2", "pygments", "weasyprint", "playwright", "pypandoc", "ultilog"]
+    checks = [
+        "markdown_it",
+        "jinja2",
+        "pygments",
+        "weasyprint",
+        "playwright",
+        "pypandoc",
+        "ultilog",
+    ]
     for module in checks:
         try:
             __import__(module)

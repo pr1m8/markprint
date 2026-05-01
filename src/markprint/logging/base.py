@@ -1,10 +1,16 @@
 """Logging backend protocol."""
+
 from __future__ import annotations
+
 import logging
 from typing import Protocol
+
 from markprint.config.models import LoggingSettings
+
+
 class LoggingBackend(Protocol):
     """Configure and provide loggers."""
+
     def configure(self, settings: LoggingSettings) -> None:
         """Configure logging.
 
@@ -15,6 +21,7 @@ class LoggingBackend(Protocol):
             None.
         """
         ...
+
     def get_logger(self, name: str) -> logging.Logger:
         """Return a logger.
 

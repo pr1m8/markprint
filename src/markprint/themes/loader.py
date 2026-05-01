@@ -1,7 +1,10 @@
 """Convenience theme loader."""
+
 from __future__ import annotations
+
 from markprint.themes.models import ThemeSpec
 from markprint.themes.registry import ThemeRegistry
+
 
 def load_theme(name_or_path: str) -> ThemeSpec:
     """Load a theme.

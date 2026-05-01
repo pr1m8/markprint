@@ -1,5 +1,7 @@
 """Unit tests for theme registry."""
+
 from markprint.themes.registry import ThemeRegistry
+
 
 def test_builtin_themes() -> None:
     registry = ThemeRegistry()

@@ -1,7 +1,10 @@
 """Unit tests for frontmatter parsing."""
+
 import pytest
+
 from markprint.frontmatter import FrontmatterParser
 from markprint.sources.models import MarkdownSource
+
 
 def test_parse_frontmatter() -> None:
     pytest.importorskip("frontmatter")

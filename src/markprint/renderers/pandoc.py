@@ -1,13 +1,20 @@
 """Optional Pandoc renderer."""
+
 from __future__ import annotations
+
 import tempfile
 from pathlib import Path
+
 from markprint.config.models import RenderOptions
-from markprint.document.models import PdfArtifact, StyledHtmlDocument
 from markprint.diagnostics.errors import DependencyMissingError
+from markprint.document.models import PdfArtifact, StyledHtmlDocument
+
+
 class PandocRenderer:
     """Render styled HTML to PDF with Pandoc where available."""
+
     name = "pandoc"
+
     def render(self, document: StyledHtmlDocument, options: RenderOptions) -> PdfArtifact:
         """Render HTML to PDF using pypandoc.
 
@@ -24,7 +31,9 @@ class PandocRenderer:
         try:
             import pypandoc
         except ImportError as exc:  # pragma: no cover
-            raise DependencyMissingError("Install with: pip install 'markprint[pandoc]' or 'markprint[pandoc-binary]'" ) from exc
+            raise DependencyMissingError(
+                "Install with: pip install 'markprint[pandoc]' or 'markprint[pandoc-binary]'"
+            ) from exc
         with tempfile.TemporaryDirectory() as tmp:
             html = Path(tmp) / "document.html"
             pdf = Path(tmp) / "document.pdf"

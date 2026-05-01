@@ -1,11 +1,17 @@
 """WeasyPrint renderer backend."""
+
 from __future__ import annotations
+
 from markprint.config.models import RenderOptions
-from markprint.document.models import PdfArtifact, StyledHtmlDocument
 from markprint.diagnostics.errors import DependencyMissingError, RenderError
+from markprint.document.models import PdfArtifact, StyledHtmlDocument
+
+
 class WeasyPrintRenderer:
     """Render styled HTML with WeasyPrint."""
+
     name = "weasyprint"
+
     def render(self, document: StyledHtmlDocument, options: RenderOptions) -> PdfArtifact:
         """Render styled HTML to PDF bytes.
 
