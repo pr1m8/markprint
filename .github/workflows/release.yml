@@ -27,7 +27,7 @@ jobs:
           python-version: "3.13"
 
       - name: Install dependencies
-        run: pdm install -G dev
+        run: pdm install -G dev -G test
 
       - name: Run lint
         run: pdm run ruff check .
